@@ -4,7 +4,8 @@ NAME	=	pipex
 
 CC		=	gcc
 CFLAGS	=	-Wall -Wextra -Werror
-OFLAGS	=	-fsanitize=address
+#OFLAGS	+=	-fsanitize=address
+OFLAGS	+=	-g
 
 
 #	Headers
@@ -65,3 +66,6 @@ re:		fclean all
 norm:
 	norminette ${SRCS}
 	norminette ${HEADER}
+
+lldb:
+	gcc ${SRCS} -I${DIR_INC} -g -o ${NAME}

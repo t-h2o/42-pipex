@@ -6,11 +6,22 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:37:16 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/21 15:49:44 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/21 18:22:05 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"pipex.h"
+
+int	pp_strlen(char *str)
+{
+	int	r;
+
+	r = 0;
+	while (str[r])
+		r++;
+	return (r);
+}
+//	return the lenght of the string
 
 static int
 	line_counter(char *str, char c)
@@ -37,8 +48,8 @@ static int
 }
 // count the number of separation.
 
-static char
-	*str_cpy(char *str, int s, int e)
+char
+	*pp_strcpy(char *str, int s, int e)
 {
 	int		lenght;
 	char	*r;
@@ -88,7 +99,7 @@ char
 		start = end;
 		while (str[end] != c)
 			end ++;
-		r[i] = str_cpy(str, start, end - 1);
+		r[i] = pp_strcpy(str, start, end - 1);
 		if (!r[i++])
 			return (0);
 	}

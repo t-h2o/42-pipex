@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:24:45 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/21 15:48:07 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/21 18:41:02 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,20 @@ void	test_split(char *str, char c)
 	free(save);
 }
 
-int
-	main(void)
+void	test_parse(t_info *info)
 {
-	test_split("I test my split function", ' ');
-	test_split(" I test my split function", ' ');
-	test_split("    I       test my split function", ' ');
-	test_split("I test my split function   ", ' ');
-	test_split(" a  ", ' ');
+	printf("infile\t: %s\n", info->inf);
+	//printf("outfile\t: %s\n", info.ouf);
+	//printf("path\t: %s\n", info.path[0]);
+}
+
+int
+	main(int argc, char **argv, char **env)
+{
+	t_info	info;
+
+	if (argc < 2)
+		return (0);
+	pp_parse(&info, argv, env);
+	test_parse(&info);
 }
