@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:37:16 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/21 18:22:05 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/22 18:11:06 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char
 		while (str[end] == c)
 			end ++;
 		start = end;
-		while (str[end] != c)
+		while (str[end] != 0 && str[end] != c)
 			end ++;
 		r[i] = pp_strcpy(str, start, end - 1);
 		if (!r[i++])

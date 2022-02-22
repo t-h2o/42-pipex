@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:29:39 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/21 18:44:13 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/22 18:22:31 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ void
 {
 	char	*path;
 
-	info->inf = argv[1];
 	path = get_info(env, "PATH=");
 	if (!path)
 		return ;
-	printf("all paths : %s\n", path);
 	info->path = pp_split(path, ':');
+	info->inf = pp_strcpy(argv[1], 0, pp_strlen(argv[1]));
+	info->ouf = pp_strcpy(argv[4], 0, pp_strlen(argv[4]));
+	info->cmd1 = pp_strcpy(argv[2], 0, pp_strlen(argv[2]));
+	info->cmd2 = pp_strcpy(argv[3], 0, pp_strlen(argv[3]));
 	free(path);
 }
 /*		example of arguments:
