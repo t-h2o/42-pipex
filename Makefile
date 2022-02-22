@@ -20,6 +20,7 @@ DIR_SRC	=	./srcs
 SRCS	=	${DIR_SRC}/main.c		\
 			${DIR_SRC}/pp_error.c	\
 			${DIR_SRC}/pp_split.c	\
+			${DIR_SRC}/pp_brexit.c	\
 			${DIR_SRC}/pp_parse.c
 
 
@@ -69,3 +70,4 @@ norm:
 
 lldb:
 	gcc ${SRCS} -I${DIR_INC} -g -o ${NAME}
+	lldb ${NAME}

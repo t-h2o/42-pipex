@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:29:39 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/22 18:22:31 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/22 21:49:12 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,21 @@ void
 	info->path = pp_split(path, ':');
 	info->inf = pp_strcpy(argv[1], 0, pp_strlen(argv[1]));
 	info->ouf = pp_strcpy(argv[4], 0, pp_strlen(argv[4]));
-	info->cmd1 = pp_strcpy(argv[2], 0, pp_strlen(argv[2]));
-	info->cmd2 = pp_strcpy(argv[3], 0, pp_strlen(argv[3]));
+	info->arg1 = pp_split(argv[2], ' ');
+	info->cmd1 = info->arg1[0];
+	info->arg1 = &(info->arg1[1]);
+	info->arg2 = pp_split(argv[3], ' ');
+	info->cmd2 = info->arg2[0];
+	info->arg2 = &(info->arg2[1]);
 	free(path);
 }
 /*		example of arguments:
  *
  *	./pipex infile cmd1 cmd2 outfile
  *	./pipex infile ``ls -l'' ``wc -l'' outfile
+ */
+/*	command
+ *
+ *	cmd1 = "cmd arg1 arg2"
+ *	arg1 = "cmd" "arg1" "arg2"
  */

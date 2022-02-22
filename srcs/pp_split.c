@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:37:16 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/22 18:11:06 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/22 22:09:12 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static int
 	}
 	if (*(--str) == c)
 		r--;
-	printf("Il y a %d lignes\n", r);
 	return (r);
 }
 // count the number of separation.

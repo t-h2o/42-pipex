@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:24:45 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/22 18:38:16 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/22 22:01:00 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	display_tab(char **tab, char *s)
 {
 	while (*tab)
 	{
-		printf("\t%s\t%s\n", s, *tab);
+		printf("%s\t%s\n", s, *tab);
 		tab++;
 	}
 }
@@ -25,11 +25,13 @@ void	test_parse(t_info *info)
 {
 	printf("infile\t: %s\n", info->inf);
 	printf("cmd 1\t: %s\n", info->cmd1);
+	display_tab(info->arg1, "\targ1");
 	printf("cmd 2\t: %s\n", info->cmd2);
+	display_tab(info->arg2, "\targ2");
 	printf("outfile\t: %s\n", info->ouf);
 	display_tab(info->path, "path");
 }
- //	./pipex infile ``ls -l'' ``wc -l'' outfile
+//	./pipex infile ``ls -l'' ``wc -l'' outfile
 
 static void
 	init_info(t_info *info, char **argv, char **env)
@@ -44,14 +46,6 @@ static void
 	pp_parse(info, argv, env);
 }
 
-void
-	free_info(t_info *info)
-{
-	free(info->inf);
-	free(info->ouf);
-	free(info->cmd1);
-}
-
 int
 	main(int argc, char **argv, char **env)
 {
@@ -63,5 +57,6 @@ int
 		return (0);
 	init_info(&info, argv, env);
 	test_parse(&info);
+	free_info(&info);
 }
- //	./pipex infile ``ls -l'' ``wc -l'' outfile
+//	./pipex infile ``ls -l -a'' ``wc -l'' outfile

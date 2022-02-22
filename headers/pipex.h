@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:41:51 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/21 17:30:29 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/22 22:07:20 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ typedef struct s_info {
  * 
  */
 
-//	pp_parse
+//	pp_brexit.c
+
+
+void	free_info(t_info *info);
+
+//	pp_parse.c
 
 void	pp_parse(t_info *info, char **argv, char **env);
 
