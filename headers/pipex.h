@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:41:51 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/23 15:19:42 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/24 00:37:50 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,20 @@
 
 //	Structur
 
+typedef struct s_cmd {
+	char	*cmd;
+	char	**arg;
+}	t_cmd;
+
 typedef struct s_info {
 	char	*inf;
 	char	*ouf;
-	char	*cmd1;
+	t_cmd	cmd1;
 	char	*cmd2;
-	char	**arg1;
 	char	**arg2;
 	char	**path;
 }	t_info;
+
 /*	inf ~ input file
  *	ouf ~ output file
  *	cmd ~ commande
