@@ -21,6 +21,7 @@ SRCS	=	${DIR_SRC}/main.c		\
 			${DIR_SRC}/pp_error.c	\
 			${DIR_SRC}/pp_split.c	\
 			${DIR_SRC}/pp_brexit.c	\
+			${DIR_SRC}/pp_execve.c	\
 			${DIR_SRC}/pp_parse.c
 
 
@@ -67,6 +68,9 @@ re:		fclean all
 norm:
 	norminette ${SRCS}
 	norminette ${HEADER}
+
+test:	all
+	./pipex infile "ls -a -l" "grep word" outfile
 
 lldb:
 	gcc ${SRCS} -I${DIR_INC} -g -o ${NAME}

@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:41:51 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/22 22:07:20 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/23 15:19:42 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include	<stdio.h>
 # include	<stdlib.h>
+# include	<unistd.h>
 
 //	Structur
 
@@ -39,7 +40,6 @@ typedef struct s_info {
  */
 
 //	pp_brexit.c
-
 
 void	free_info(t_info *info);
 

@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:24:45 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/22 22:01:00 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/23 15:22:15 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ int
 	if (argc != 5)
 		return (0);
 	init_info(&info, argv, env);
+	
 	test_parse(&info);
+
 	free_info(&info);
 }
 //	./pipex infile ``ls -l -a'' ``wc -l'' outfile
