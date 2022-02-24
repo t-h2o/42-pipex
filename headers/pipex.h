@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:41:51 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/24 00:37:50 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/24 09:23:27 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ typedef struct s_info {
 	char	*inf;
 	char	*ouf;
 	t_cmd	cmd1;
-	char	*cmd2;
-	char	**arg2;
+	t_cmd	cmd2;
 	char	**path;
 }	t_info;
 

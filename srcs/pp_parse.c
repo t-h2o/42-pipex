@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:29:39 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/24 00:37:06 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/24 09:26:12 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,11 @@ void
 	info->cmd1.arg = pp_split(argv[2], ' ');
 	info->cmd1.cmd = info->cmd1.arg[0];
 	info->cmd1.arg = &(info->cmd1.arg[1]);
-	info->arg2 = pp_split(argv[3], ' ');
-	info->cmd2 = info->arg2[0];
-	info->arg2 = &(info->arg2[1]);
+	info->cmd2.arg = pp_split(argv[2], ' ');
+	info->cmd2.cmd = info->cmd2.arg[0];
+	info->cmd2.arg = &(info->cmd2.arg[1]);
 	pp_execve(info, &info->cmd1.cmd);
-	pp_execve(info, &(info->cmd2));
+	pp_execve(info, &info->cmd2.cmd);
 }
 /*		example of arguments:
  *

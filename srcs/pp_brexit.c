@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 21:59:11 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/24 00:39:05 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/24 09:25:16 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void
 	free(info->inf);
 	free(info->ouf);
 	free(info->cmd1.cmd);
-	free(info->cmd2);
-	free_tab(info->path, 1);
 	free_tab(info->cmd1.arg, 0);
-	free_tab(info->arg2, 0);
+	free(info->cmd2.cmd);
+	free_tab(info->cmd2.arg, 0);
+	free_tab(info->path, 1);
 }
