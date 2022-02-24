@@ -21,6 +21,7 @@ SRCS	=	${DIR_SRC}/main.c		\
 			${DIR_SRC}/pp_error.c	\
 			${DIR_SRC}/pp_split.c	\
 			${DIR_SRC}/pp_brexit.c	\
+			${DIR_SRC}/pp_pipex.c	\
 			${DIR_SRC}/pp_parse.c
 
 

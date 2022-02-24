@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:24:45 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/24 09:24:32 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/24 16:17:49 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int
 	init_info(&info, argv, env);
 	
 	test_parse(&info);
+
+	pp_pipex(&info);
 
 	free_info(&info);
 }
