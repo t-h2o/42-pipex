@@ -6,14 +6,14 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:41:51 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/25 14:24:57 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/25 16:48:06 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-//	Include
+	//	Include
 
 # include	<stdio.h>
 # include	<stdlib.h>
@@ -25,7 +25,7 @@
 # define	STDOUT	1
 # define	STDERR	2
 
-//	Structur
+	//	Structur
 
 typedef struct s_cmd {
 	char	*cmd;
@@ -49,22 +49,22 @@ typedef struct s_info {
  * 
  */
 
-//	pp_brexit.c
+	//	pp_brexit.c
 
 // free info struct and exit the program with exit value
 void	pp_brexit(t_info *info, int exitValue);
 
-//	pp_parse.c
+	//	pp_parse.c
 
 int		pp_parse(t_info *info, char **argv, char **env);
 
-//	pp_split.c
+	//	pp_split.c
 
 char	**pp_split(char *str, char c);
 char	*pp_strcpy(char *str, int s, int e);
 int		pp_strlen(char *str);
 
-//	pp_pipex.c
+	//	pp_pipex.c
 
 int		pp_pipex(t_info *info, char **env);
 

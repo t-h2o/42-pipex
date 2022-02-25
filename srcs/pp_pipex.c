@@ -6,14 +6,14 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:28:05 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/25 14:15:55 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/25 16:46:16 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"pipex.h"
 
 static int
-	proc_child(t_cmd *cmd, char **env, pid_t *pid)
+	proc_child(t_cmd *cmd, char **env, pid_t *pid, int *fd)
 {
 	int	ret;
 
@@ -37,6 +37,7 @@ int
 	pp_pipex(t_info *info, char **env)
 {
 	int		status;
+	int		fildes;
 	int		pipefd[2];
 	pid_t	child[2];
 
@@ -46,6 +47,13 @@ int
 		return (-1);
 	}
 
+	fildes = open(info->inf, O_RDONLY);
+
+	if(dup2(fildes, 0) == -1)
+	{
+		printf("Error, dup2 failed\n");
+		pp_brexit(info, -9);
+	}
 	if (proc_child(&info->cmd1, env, &child[0]))
 		pp_brexit(info, -4);
 	waitpid(child[0], &status, 0);
