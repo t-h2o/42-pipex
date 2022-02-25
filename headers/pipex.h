@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:41:51 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/25 13:49:24 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/25 14:11:36 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_info {
 //	pp_brexit.c
 
 // free info struct and exit the program with exit value
-void	free_info(t_info *info, int exitValue);
+void	pp_brexit(t_info *info, int exitValue);
 
 //	pp_parse.c
 

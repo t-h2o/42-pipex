@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 21:59:11 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/25 13:47:09 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/25 14:12:31 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void
  */
 
 void
-	free_info(t_info *info, int exitValue)
+	pp_brexit(t_info *info, int exitValue)
 {
 	free(info->inf);
 	free(info->ouf);

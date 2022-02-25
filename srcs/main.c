@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:24:45 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/25 13:45:57 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/25 14:12:11 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int
 
 	if (init_info(&info, argv, env))
 	{
-		free_info(&info);
+		pp_brexit(&info, 12);
 		return (3);
 	}
 	
@@ -67,7 +67,7 @@ int
 
 	pp_pipex(&info, env);
 
-	free_info(&info);
+	pp_brexit(&info, 23);
 
 	return (0);
 }
