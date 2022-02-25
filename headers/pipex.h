@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:41:51 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/25 14:11:36 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/25 14:24:57 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 # include	<stdio.h>
 # include	<stdlib.h>
 # include	<unistd.h>
+
+//	Define
+
+# define	STDIN	0
+# define	STDOUT	1
+# define	STDERR	2
 
 //	Structur
 
