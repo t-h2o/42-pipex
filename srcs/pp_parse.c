@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:29:39 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/24 15:24:58 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/25 12:00:45 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,7 @@ static int
 	if (!*path)
 		ret = -1;
 	else
-	{
-		free(*search);
 		*search = cmd;
-	}
 	return (ret);
 }
 
@@ -106,10 +103,8 @@ void
 	info->ouf = pp_strcpy(argv[4], 0, pp_strlen(argv[4]));
 	info->cmd1.arg = pp_split(argv[2], ' ');
 	info->cmd1.cmd = info->cmd1.arg[0];
-	info->cmd1.arg = &(info->cmd1.arg[1]);
 	info->cmd2.arg = pp_split(argv[3], ' ');
 	info->cmd2.cmd = info->cmd2.arg[0];
-	info->cmd2.arg = &(info->cmd2.arg[1]);
 	pp_execve(info, &info->cmd1.cmd);
 	pp_execve(info, &info->cmd2.cmd);
 }

@@ -6,14 +6,14 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 21:59:11 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/24 09:25:16 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/25 12:03:54 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"pipex.h"
 
 static void
-	free_tab(char **tab, int option)
+	free_tab(char **tab)
 {
 	char	**save;
 
@@ -23,13 +23,9 @@ static void
 		free(*tab);
 		tab++;
 	}
-	if (option)
-		free(save);
+	free(save);
 }
-/*	option 1
- *		free the tab
- *	option 0
- *		not free the tab
+/*	free each line and the tab
  */
 
 void
@@ -38,8 +34,8 @@ void
 	free(info->inf);
 	free(info->ouf);
 	free(info->cmd1.cmd);
-	free_tab(info->cmd1.arg, 0);
+	free_tab(info->cmd1.arg);
 	free(info->cmd2.cmd);
-	free_tab(info->cmd2.arg, 0);
-	free_tab(info->path, 1);
+	free_tab(info->cmd2.arg);
+	free_tab(info->path);
 }
