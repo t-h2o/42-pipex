@@ -8,7 +8,9 @@ Clic to see [explanation](./Assets/readme/explain.md)
 
 * split
 * parse
+* fork
 
 ## Ressource
 
 * [tutorial](https://csnotes.medium.com/pipex-tutorial-42-project-4469f5dd5901)
+* [video about fork](https://www.youtube.com/watch?v=cex9XrZCU14)
