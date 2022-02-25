@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:28:05 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/25 11:37:03 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/25 13:59:23 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ int
 		return (-1);
 	}
 
-	proc_child(&info->cmd1, env, &child[0]);
+	if (proc_child(&info->cmd1, env, &child[0]))
+		pp_brexit(info, -4);
 	waitpid(child[0], &status, 0);
 
-	proc_child(&info->cmd2, env, &child[1]);
+	if (proc_child(&info->cmd2, env, &child[1]))
+		pp_brexit(info, -5);
 	waitpid(child[1], &status, 0);
 
 	printf("I'm the parent!\n\n");

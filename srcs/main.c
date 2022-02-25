@@ -6,13 +6,14 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:24:45 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/25 11:36:01 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/02/25 13:45:57 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"pipex.h"
 
-void	display_tab(char **tab, char *s)
+static void
+	display_tab(char **tab, char *s)
 {
 	while (*tab)
 	{
@@ -21,7 +22,8 @@ void	display_tab(char **tab, char *s)
 	}
 }
 
-void	test_parse(t_info *info)
+static void
+	test_parse(t_info *info)
 {
 	printf("infile\t: %s\n", info->inf);
 	printf("cmd 1\t: %s\n", info->cmd1.cmd);
@@ -32,7 +34,7 @@ void	test_parse(t_info *info)
 }
 //	./pipex infile ``ls -l'' ``wc -l'' outfile
 
-static void
+static int
 	init_info(t_info *info, char **argv, char **env)
 {
 	info->inf = 0;
@@ -42,7 +44,7 @@ static void
 	info->cmd2.cmd = 0;
 	info->cmd2.arg = 0;
 	info->path = 0;
-	pp_parse(info, argv, env);
+	return (pp_parse(info, argv, env));
 }
 
 int
@@ -53,14 +55,20 @@ int
 	if (argc != 5)
 		printf("Error, bad number of arguments\n");
 	if (argc != 5)
-		return (0);
+		return (2);
 
-	init_info(&info, argv, env);
+	if (init_info(&info, argv, env))
+	{
+		free_info(&info);
+		return (3);
+	}
 	
-	test_parse(&info);
+	test_parse(&info);	// display information
 
 	pp_pipex(&info, env);
 
 	free_info(&info);
+
+	return (0);
 }
 //	./pipex infile ``ls -l -a'' ``wc -l'' outfile
