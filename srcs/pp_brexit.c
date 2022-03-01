@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 21:59:11 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/25 14:12:31 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/01 10:41:25 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void
 void
 	pp_brexit(t_info *info, int exitValue)
 {
-	free(info->inf);
-	free(info->ouf);
+	free(info->inf.path);
+	free(info->ouf.path);
 	free(info->cmd1.cmd);
 	free_tab(info->cmd1.arg);
 	free(info->cmd2.cmd);

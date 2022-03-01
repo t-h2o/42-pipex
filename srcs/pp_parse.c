@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:29:39 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/25 13:56:29 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/01 10:26:51 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ int
 	pp_parse(t_info *info, char **argv, char **env)
 {
 	get_info(info, env, "PATH=");
-	info->inf = pp_strcpy(argv[1], 0, pp_strlen(argv[1]));
-	info->ouf = pp_strcpy(argv[4], 0, pp_strlen(argv[4]));
+	info->inf.path = pp_strcpy(argv[1], 0, pp_strlen(argv[1]));
+	info->ouf.path = pp_strcpy(argv[4], 0, pp_strlen(argv[4]));
 	info->cmd1.arg = pp_split(argv[2], ' ');
 	info->cmd1.cmd = info->cmd1.arg[0];
 	info->cmd2.arg = pp_split(argv[3], ' ');

@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:24:45 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/25 14:12:11 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/01 10:27:35 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@ static void
 static void
 	test_parse(t_info *info)
 {
-	printf("infile\t: %s\n", info->inf);
+	printf("infile\t: %s\n", info->inf.path);
 	printf("cmd 1\t: %s\n", info->cmd1.cmd);
 	display_tab(info->cmd1.arg, "\targ1");
 	printf("cmd 2\t: %s\n", info->cmd2.cmd);
 	display_tab(info->cmd2.arg, "\targ2");
-	printf("outfile\t: %s\n", info->ouf);
+	printf("outfile\t: %s\n", info->ouf.path);
 }
 //	./pipex infile ``ls -l'' ``wc -l'' outfile
 
 static int
 	init_info(t_info *info, char **argv, char **env)
 {
-	info->inf = 0;
-	info->ouf = 0;
+	info->inf.path = 0;
+	info->ouf.path = 0;
 	info->cmd1.cmd = 0;
 	info->cmd1.arg = 0;
 	info->cmd2.cmd = 0;

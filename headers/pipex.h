@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:41:51 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/02/25 16:48:06 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/01 10:42:33 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 	//	Include
 
+# include	<fcntl.h>
 # include	<stdio.h>
 # include	<stdlib.h>
 # include	<unistd.h>
@@ -27,14 +28,19 @@
 
 	//	Structur
 
+typedef struct s_file {
+	char	*path;
+	int		fd;
+}	t_file;
+
 typedef struct s_cmd {
 	char	*cmd;
 	char	**arg;
 }	t_cmd;
 
 typedef struct s_info {
-	char	*inf;
-	char	*ouf;
+	t_file	inf;
+	t_file	ouf;
 	t_cmd	cmd1;
 	t_cmd	cmd2;
 	char	**path;
