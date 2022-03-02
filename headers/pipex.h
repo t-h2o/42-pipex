@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:41:51 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/01 10:42:33 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/02 23:05:21 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include	<stdio.h>
 # include	<stdlib.h>
 # include	<unistd.h>
+# include	<sys/types.h>
+# include	<sys/wait.h>
 
 //	Define
 
