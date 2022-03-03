@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:24:45 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/01 10:27:35 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/03 23:52:06 by hypn0x           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,23 @@ int
 	main(int argc, char **argv, char **env)
 {
 	t_info	info;
+	
+	// My preference of fd
+//	int	fdio[2];
 
 	if (argc != 5)
+	{
 		printf("Error, bad number of arguments\n");
-	if (argc != 5)
 		return (2);
+	}
+
+	// Open infile and outfile
+	// 0 = Infile
+	// 1 = Outfile
+	/*fdio[0] = open_f(argv[1], O_RDONLY);
+	fdio[1] = open_f(argv[argc - 1], O_WRONLY | O_CREATE | O_TRUNC);
+	dup2(fdio[0], STDIN_FILENO);
+	i = 1;*/
 
 	if (init_info(&info, argv, env))
 	{
@@ -65,7 +77,7 @@ int
 	
 	test_parse(&info);	// display information
 
-	pp_pipex(&info, env);
+	pp_pipex(&info, env, argc);
 
 	pp_brexit(&info, 23);
 

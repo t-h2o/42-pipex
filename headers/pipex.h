@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:41:51 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/02 23:05:21 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/03 23:35:31 by hypn0x           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ int		pp_strlen(char *str);
 
 	//	pp_pipex.c
 
-int		pp_pipex(t_info *info, char **env);
+int		pp_pipex(t_info *info, char **env, int argc);
 
 #endif /* PIPEX_H */

@@ -6,27 +6,54 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:28:05 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/03 14:11:28 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/03 23:54:13 by hypn0x           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"pipex.h"
 
 int
-	pp_pipex(t_info *info, char **env)
+	pp_pipex(t_info *info, char **env, int argc)
 {
 	int		status;
-	int		pipefd[2];
-	pid_t	child[2];
+	int		fd[2];
+	pid_t	pid;
 
 	info->inf.fd = open(info->inf.path, O_RDONLY);
-	info->ouf.fd = open(info->ouf.path, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	info->ouf.fd = open(info->ouf.path, O_CREAT | O_RDWR | O_TRUNC);
+	dup2(info->inf.fd, STDIN_FILENO);
+	int i = 1;
+	while (++i < argc - 2)
+	{
+		if (pipe(fd) == -1)
+			printf("pipes die\n");
+			//TODO: Create your own condition
+			//I won't do it because I'm too lazy to do it.
+		pid = fork();
+		if (pid > 0)
+		{	
+			// 1 = output we don't need since we just read
+			close(fd[1]);
+			dup2(fd[0], STDIN_FILENO);
+			close(fd[0]);
+			waitpid(pid, &status, 0);
+			if (WEXITSTATUS(status) == EXIT_FAILURE)
+				exit(EXIT_FAILURE);
+		}
+		else
+		{
+			close(fd[0]);
+			dup2(fd[1], STDOUT_FILENO);
+			close(fd[1]);
+			execve(info->cmd1.cmd, info->cmd1.arg, env);
+			printf("Command not found\n");
+			//TODO: Whatever the fuck you want
+		}
+	}
+	dup2(info->ouf.fd, STDOUT_FILENO);
+	execve(info->cmd2.cmd, info->cmd2.arg, env);
 
-	if (pipe(pipefd) == -1)
-		printf("Error, fail pipe\n");
-
-	child[0] = fork();
-
+/*
 	if (child[0] == -1)
 		printf("Error, fork 1\n");
 
@@ -68,7 +95,7 @@ int
 	close(info->ouf.fd);
 
 	waitpid(child[0], &status, 0);
-	waitpid(child[1], &status, 0);
+	waitpid(child[1], &status, 0);*/
 	return (0);
 }
 /*parent
