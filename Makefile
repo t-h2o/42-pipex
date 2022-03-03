@@ -70,7 +70,10 @@ norm:
 	norminette ${HEADER}
 
 test:	all
-	./pipex infile "ls -a -l" "grep word" outfile
+	@ls -a -l > infile
+	@bat infile
+	./pipex infile "cat" "grep A" outfile
+	@bat outfile
 
 lldb:
 	gcc ${SRCS} -I${DIR_INC} -g -o ${NAME}
