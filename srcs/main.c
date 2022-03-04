@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:24:45 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/03 23:52:06 by hypn0x           ###   ########.fr       */
+/*   Updated: 2022/03/03 23:57:00 by hypn0x           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,6 @@ int
 		printf("Error, bad number of arguments\n");
 		return (2);
 	}
-
-	// Open infile and outfile
-	// 0 = Infile
-	// 1 = Outfile
-	/*fdio[0] = open_f(argv[1], O_RDONLY);
-	fdio[1] = open_f(argv[argc - 1], O_WRONLY | O_CREATE | O_TRUNC);
-	dup2(fdio[0], STDIN_FILENO);
-	i = 1;*/
 
 	if (init_info(&info, argv, env))
 	{

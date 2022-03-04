@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:28:05 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/03 23:54:13 by hypn0x           ###   ########.fr       */
+/*   Updated: 2022/03/04 00:00:13 by hypn0x           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int
 	int		status;
 	int		fd[2];
 	pid_t	pid;
-
+(void)argc;
 	info->inf.fd = open(info->inf.path, O_RDONLY);
 	info->ouf.fd = open(info->ouf.path, O_CREAT | O_RDWR | O_TRUNC);
 	dup2(info->inf.fd, STDIN_FILENO);
-	int i = 1;
-	while (++i < argc - 2)
-	{
+//	int i = 1;
+	//while (++i < argc - 2)
+	//{
 		if (pipe(fd) == -1)
 			printf("pipes die\n");
 			//TODO: Create your own condition
@@ -49,7 +49,7 @@ int
 			printf("Command not found\n");
 			//TODO: Whatever the fuck you want
 		}
-	}
+	//}
 	dup2(info->ouf.fd, STDOUT_FILENO);
 	execve(info->cmd2.cmd, info->cmd2.arg, env);
 
