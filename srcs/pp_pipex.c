@@ -6,69 +6,58 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:28:05 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/03 14:11:28 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/04 11:51:50 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"pipex.h"
 
+# define	PIPE_WRITE	1
+# define	PIPE_READ	0
+
 int
 	pp_pipex(t_info *info, char **env)
 {
 	int		status;
-	int		pipefd[2];
-	pid_t	child[2];
+	int		fd[2];
+	pid_t	child;
 
 	info->inf.fd = open(info->inf.path, O_RDONLY);
+	if (info->inf.fd < 0)
+		printf("Error, infile open\n");
+
 	info->ouf.fd = open(info->ouf.path, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (info->ouf.fd < 0)
+		printf("Error, outfile open\n");
 
-	if (pipe(pipefd) == -1)
-		printf("Error, fail pipe\n");
+	if (pipe(fd) == -1)
+		printf("Error, pipe\n");
 
-	child[0] = fork();
+	child = fork();
 
-	if (child[0] == -1)
-		printf("Error, fork 1\n");
+	if (child == -1)
+		printf("Error, fork\n");
 
-	if (!child[0])
+	if (child == 0)	// child
 	{
-		if (dup2(info->inf.fd, STDIN) == -1)
-			return (-1);
-		if (dup2(pipefd[0], STDOUT) == -1)
-			return (-1);
-		close(info->inf.fd);
-		close(info->ouf.fd);
-		close(pipefd[1]);
+		dup2(info->inf.fd, STDIN);
+		dup2(fd[PIPE_WRITE], STDOUT);
+		close(fd[PIPE_READ]);
+		close(fd[PIPE_WRITE]);
 		execve(info->cmd1.cmd, info->cmd1.arg, env);
-		printf("Error, execve 1\n");
-		return (-1);
+		printf("Error cmd 1\n");
 	}
-
-	child[1] = fork();
-
-	if (child[1] == -1)
-		printf("Error, fork 2\n");
-
-	if (!child[1])
+	else
 	{
-		if (dup2(pipefd[1], STDIN) == -1)
-			return (-1);
-		//if (dup2(info->ouf.fd, STDOUT) == -1)
-		//	return (-1);
-		close(info->ouf.fd);
-		close(pipefd[0]);
+		dup2(fd[PIPE_READ], STDIN);
+		dup2(info->ouf.fd, STDOUT);
+		close(fd[PIPE_READ]);
+		close(fd[PIPE_WRITE]);
+		waitpid(child, &status, 0);
 		execve(info->cmd2.cmd, info->cmd2.arg, env);
-		printf("Error, execve 2\n");
-		return (-1);
+		printf("Error cmd 2\n");
 	}
 
-	close(pipefd[0]);
-	close(pipefd[1]);
-	close(info->inf.fd);
-	close(info->ouf.fd);
-
-	waitpid(child[0], &status, 0);
-	waitpid(child[1], &status, 0);
 	return (0);
 }
 /*parent
