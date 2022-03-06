@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:41:51 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/06 12:05:32 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/06 16:11:12 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,39 @@ typedef struct s_file {
 	char	*path;
 	int		fd;
 }	t_file;
+/*	path of file
+ *	file descriptor of the path
+ */
 
-typedef struct s_cmd {
+typedef struct s_cmd t_cmd;
+struct s_cmd {
 	char	*cmd;
 	char	**arg;
-}	t_cmd;
+	t_cmd	*next;
+};
+/*	cmd: 
+ *		command with his path
+ *	arg: 
+ *		argument of the command
+ *	next: 
+ *		next command
+ */
 
 typedef struct s_info {
 	t_file	inf;
 	t_file	ouf;
-	t_cmd	cmd1;
-	t_cmd	cmd2;
-	char	**path;
+	t_cmd	*tcmd;
+	char	**envp;
 }	t_info;
-
-/*	inf ~ input file
- *	ouf ~ output file
- *	cmd ~ commande
- *	arg ~ arguments of the commande
- *	path
+/*	inf: 
+ *		input file
+ *	ouf: 
+ *		output file
+ *	tcmd: 
+ *		top command
+ *	arg: 
+ *		arguments of the commande
+ *	envp
  *		all path of binaries
  * 
  */
@@ -64,7 +78,7 @@ void	pp_brexit(t_info *info, int exitValue);
 
 	//	pp_parse.c
 
-int		pp_parse(t_info *info, char **argv, char **env);
+void	pp_parse(t_info *info, char **argv, char **env);
 
 	//	pp_split.c
 
@@ -78,6 +92,6 @@ int		pp_pipex(t_info *info, char **env);
 
 	//	pp_error.c
 
-void	pp_errmsg(char *str, ...);
+void	pp_errmsg(t_info *info, int exitValue, char *str, ...);
 
 #endif /* PIPEX_H */

@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:29:39 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/06 14:13:05 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/06 17:36:04 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void
 	char	*cmd;
 	char	**path;
 
-	path = info->path;
+	path = info->envp;
 	while (*path)
 	{
 		cmd = ft_join_cmd(*path, *search);
@@ -88,8 +88,30 @@ static void
 		}
 		env++;
 	}
-	info->path = pp_split(path, ':');
+	info->envp = pp_split(path, ':');
 	return ;
+}
+
+static void
+	parse_cmd(t_info *info, char **argv)
+{
+	t_cmd	*ptr;
+	int		i;
+
+	ptr = info->tcmd;
+
+	i = 0;
+
+	while (argv[2 + i])
+	{
+		ptr = malloc(sizeof(t_cmd));
+		ptr->arg = pp_split(argv[2 + i], ' ');
+		ptr->cmd
+			= pp_strcpy(ptr->arg[0], 0, pp_strlen(ptr->arg[0]));
+		find_path_cmd(info, &ptr->cmd);
+		ptr = ptr->next;
+		i++;
+	}
 }
 
 void
@@ -98,15 +120,7 @@ void
 	get_info(info, env, "PATH=");
 	info->inf.path = pp_strcpy(argv[1], 0, pp_strlen(argv[1]));
 	info->ouf.path = pp_strcpy(argv[4], 0, pp_strlen(argv[4]));
-	info->cmd1.arg = pp_split(argv[2], ' ');
-	info->cmd1.cmd
-		= pp_strcpy(info->cmd1.arg[0], 0, pp_strlen(info->cmd1.arg[0]));
-	info->cmd2.arg = pp_split(argv[3], ' ');
-	info->cmd2.cmd
-		= pp_strcpy(info->cmd2.arg[0], 0, pp_strlen(info->cmd2.arg[0]));
-	info->cmd2.arg = pp_split(argv[3], ' ');
-	find_path_cmd(info, &info->cmd1.cmd);
-	find_path_cmd(info, &info->cmd2.cmd);
+	parse_cmd(info, argv);
 }
 /*		example of arguments:
  *

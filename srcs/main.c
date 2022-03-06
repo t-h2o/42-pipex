@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:24:45 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/06 14:19:00 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/06 17:39:23 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ static void
 {
 	info->inf.path = 0;
 	info->ouf.path = 0;
-	info->cmd1.cmd = 0;
-	info->cmd1.arg = 0;
-	info->cmd2.cmd = 0;
-	info->cmd2.arg = 0;
-	info->path = 0;
+	info->tcmd = 0;
+	info->envp = 0;
 	pp_parse(info, argv, env);
 }
+/*	Always set a structure
+ */
 
 int
 	main(int argc, char **argv, char **env)

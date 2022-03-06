@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:28:05 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/04 11:51:50 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/06 17:34:33 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int
 	int		status;
 	int		fd[2];
 	pid_t	child;
+	t_cmd	*ptr;
 
 	info->inf.fd = open(info->inf.path, O_RDONLY);
 	if (info->inf.fd < 0)
@@ -33,6 +34,7 @@ int
 	if (pipe(fd) == -1)
 		printf("Error, pipe\n");
 
+	ptr = info->tcmd;
 	child = fork();
 
 	if (child == -1)
@@ -44,17 +46,18 @@ int
 		dup2(fd[PIPE_WRITE], STDOUT);
 		close(fd[PIPE_READ]);
 		close(fd[PIPE_WRITE]);
-		execve(info->cmd1.cmd, info->cmd1.arg, env);
+		execve(ptr->cmd, ptr->arg, env);
 		printf("Error cmd 1\n");
 	}
 	else
 	{
+		ptr = ptr->next;
 		dup2(fd[PIPE_READ], STDIN);
 		dup2(info->ouf.fd, STDOUT);
 		close(fd[PIPE_READ]);
 		close(fd[PIPE_WRITE]);
 		waitpid(child, &status, 0);
-		execve(info->cmd2.cmd, info->cmd2.arg, env);
+		execve(ptr->cmd, ptr->arg, env);
 		printf("Error cmd 2\n");
 	}
 
