@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 11:55:03 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/06 12:09:47 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/06 12:40:02 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void
  *	the standard error output
  */
 
-void	pp_errmsg(char *str, ...)
+void	pp_errmsg(t_info *info, int exitValue, char *str, ...)
 {
 	va_list	arg;
 
@@ -44,7 +44,9 @@ void	pp_errmsg(char *str, ...)
 			str++;
 		}
 	}
+	write(2, "\n", 1);
 	va_end(arg);
+	pp_brexit(info, exitValue);
 }
 /*	As a pintf function,
  *	I set a variable argument lists

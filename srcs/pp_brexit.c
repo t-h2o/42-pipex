@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 21:59:11 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/04 23:06:24 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/06 14:18:52 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ static void
 void
 	pp_brexit(t_info *info, int exitValue)
 {
-	free_tab(&info->cmd1.arg);
-	free_tab(&info->cmd2.arg);
-	free_set_null(&info->cmd1.cmd);
-	free_set_null(&info->cmd1.cmd);
-	free_set_null(&info->inf.path);
-	free_set_null(&info->ouf.path);
-
+	if (info)
+	{
+		free_tab(&info->cmd1.arg);
+		free_tab(&info->cmd2.arg);
+		free_set_null(&info->cmd1.cmd);
+		free_set_null(&info->cmd1.cmd);
+		free_set_null(&info->inf.path);
+		free_set_null(&info->ouf.path);
+	}
 	exit(exitValue);
 }

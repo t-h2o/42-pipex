@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:29:39 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/04 23:11:36 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/06 14:13:05 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static void
 	while (*path)
 	{
 		cmd = ft_join_cmd(*path, *search);
+		if (!cmd)
+			pp_errmsg(info, 89, "pipex : join error");
 		if (access(cmd, X_OK))
 			free(cmd);
 		else
@@ -58,9 +60,7 @@ static void
 		path++;
 	}
 	if (!*path)
-	{
-		pp_brexit(info, -1);
-	}
+		pp_errmsg(info, 89, "pipex: %s: command not found", *search);
 	free(*search);
 	*search = cmd;
 }
@@ -83,7 +83,7 @@ static void
 		{
 			path = pp_strcpy(*env, i, pp_strlen(*env));
 			if (!path)
-				pp_brexit(info, -2);
+				pp_errmsg(info, -2, "pipex : Cannot find path");
 			break ;
 		}
 		env++;
@@ -92,20 +92,21 @@ static void
 	return ;
 }
 
-int
+void
 	pp_parse(t_info *info, char **argv, char **env)
 {
 	get_info(info, env, "PATH=");
 	info->inf.path = pp_strcpy(argv[1], 0, pp_strlen(argv[1]));
 	info->ouf.path = pp_strcpy(argv[4], 0, pp_strlen(argv[4]));
 	info->cmd1.arg = pp_split(argv[2], ' ');
-	info->cmd1.cmd = pp_strcpy(info->cmd1.arg[0], 0, pp_strlen(info->cmd1.arg[0]));
+	info->cmd1.cmd
+		= pp_strcpy(info->cmd1.arg[0], 0, pp_strlen(info->cmd1.arg[0]));
 	info->cmd2.arg = pp_split(argv[3], ' ');
-	info->cmd2.cmd = pp_strcpy(info->cmd2.arg[0], 0, pp_strlen(info->cmd2.arg[0]));
+	info->cmd2.cmd
+		= pp_strcpy(info->cmd2.arg[0], 0, pp_strlen(info->cmd2.arg[0]));
 	info->cmd2.arg = pp_split(argv[3], ' ');
 	find_path_cmd(info, &info->cmd1.cmd);
 	find_path_cmd(info, &info->cmd2.cmd);
-	return (0);
 }
 /*		example of arguments:
  *

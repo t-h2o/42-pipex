@@ -3,3 +3,4 @@ objs/
 infile
 outfile
 .DS_Store
+pipex.dSYM
