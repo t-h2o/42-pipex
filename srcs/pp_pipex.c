@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:28:05 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/06 17:34:33 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/07 14:41:09 by melogr@phy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,20 @@
 # define	PIPE_WRITE	1
 # define	PIPE_READ	0
 
-int
+static void
+	openfiles(t_info *info, int *fd)
+{
+	info->inf.fd = open(info->inf.path, O_RDONLY);
+	if (info->inf.fd < 0)
+		pp_errmsg(info, 70, "pipex: open: cannot open infile");
+	info->ouf.fd = open(info->ouf.path, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (info->ouf.fd < 0)
+		pp_errmsg(info, 70, "pipex: open: cannot create/open outfile");
+	if (pipe(fd) == -1)
+		pp_errmsg(info, 70, "pipex: pipe: pipe(fd) failed");
+}
+
+void
 	pp_pipex(t_info *info, char **env)
 {
 	int		status;
@@ -23,22 +36,13 @@ int
 	pid_t	child;
 	t_cmd	*ptr;
 
-	info->inf.fd = open(info->inf.path, O_RDONLY);
-	if (info->inf.fd < 0)
-		printf("Error, infile open\n");
-
-	info->ouf.fd = open(info->ouf.path, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (info->ouf.fd < 0)
-		printf("Error, outfile open\n");
-
-	if (pipe(fd) == -1)
-		printf("Error, pipe\n");
+	openfiles(info, fd);
 
 	ptr = info->tcmd;
 	child = fork();
 
 	if (child == -1)
-		printf("Error, fork\n");
+		pp_errmsg(info, 70, "pipex: fork(): failed");
 
 	if (child == 0)	// child
 	{
@@ -60,8 +64,6 @@ int
 		execve(ptr->cmd, ptr->arg, env);
 		printf("Error cmd 2\n");
 	}
-
-	return (0);
 }
 /*parent
  * │
