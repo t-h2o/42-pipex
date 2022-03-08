@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:29:39 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/08 13:18:04 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:02:55 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void
 	{
 		cmd = ft_join_cmd(*path, *search);
 		if (!cmd)
-			pp_errmsg(info, 89, "pipex : join error");
+			pp_errmsg(info, 89, "pipex: Error: join return 0");
 		if (access(cmd, X_OK))
 			free(cmd);
 		else
@@ -83,7 +83,7 @@ static void
 		{
 			path = pp_strcpy(*env, i, pp_strlen(*env));
 			if (!path)
-				pp_errmsg(info, -2, "pipex : Cannot find path");
+				pp_errmsg(info, -2, "pipex: Error: Cannot find path in env");
 			break ;
 		}
 		env++;
@@ -91,6 +91,9 @@ static void
 	info->envp = pp_split(path, ':');
 	return ;
 }
+/*	get all path of binary
+ *	put the info in tab**
+ */
 
 static void
 	parse_cmd(t_info *info, char **argv)
@@ -112,13 +115,11 @@ static void
 		{
 			ptr->next = malloc(sizeof(t_cmd));
 			if (ptr->next == 0)
-				pp_errmsg(info, -2, "pipex: malloc(): t_cmd");
+				pp_errmsg(info, -2, "pipex: Error: malloc t_cmd");
 			ptr = ptr->next;
 		}
 		else
-		{
 			break ;
-		}
 		i++;
 	}
 }

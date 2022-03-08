@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:41:51 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/08 13:08:02 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:10:09 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 
 //	Define
 
-# define	STDIN	0
-# define	STDOUT	1
-# define	STDERR	2
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
 
 	//	Structur
 
@@ -38,7 +38,7 @@ typedef struct s_file {
  *	file descriptor of the path
  */
 
-typedef struct s_cmd t_cmd;
+typedef struct s_cmd	t_cmd;
 struct s_cmd {
 	char	*cmd;
 	char	**arg;

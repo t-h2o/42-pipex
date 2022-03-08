@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 21:59:11 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/08 12:44:14 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/08 13:53:22 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ static void
 		i++;
 	}
 }
+
 static void
 	free_cmd(t_cmd *ptr)
 {
 	t_cmd	*tmp;
+
 	while (ptr->next)
 	{
 		tmp = ptr->next;
@@ -43,7 +45,6 @@ static void
 		free(ptr);
 		ptr = tmp;
 	}
-
 }
 
 void
