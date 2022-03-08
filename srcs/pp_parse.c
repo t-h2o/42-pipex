@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:29:39 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/06 17:36:04 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/08 13:05:44 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,17 +99,25 @@ static void
 	int		i;
 
 	ptr = info->tcmd;
-
 	i = 0;
-
-	while (argv[2 + i])
+	while (1)
 	{
-		ptr = malloc(sizeof(t_cmd));
 		ptr->arg = pp_split(argv[2 + i], ' ');
 		ptr->cmd
 			= pp_strcpy(ptr->arg[0], 0, pp_strlen(ptr->arg[0]));
+		ptr->next = 0;
 		find_path_cmd(info, &ptr->cmd);
-		ptr = ptr->next;
+		if (argv[4 + i])
+		{
+			ptr->next = malloc(sizeof(t_cmd));
+			if (ptr->next == 0)
+				pp_errmsg(info, -2, "pipex: malloc(): t_cmd");
+			ptr = ptr->next;
+		}
+		else
+		{
+			break ;
+		}
 		i++;
 	}
 }

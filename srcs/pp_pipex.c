@@ -6,16 +6,29 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:28:05 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/06 17:34:33 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/08 13:12:58 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"pipex.h"
 
-# define	PIPE_WRITE	1
-# define	PIPE_READ	0
+#define PIPE_WRITE 1
+#define PIPE_READ 0
 
-int
+static void
+	openfiles(t_info *info, int *fd)
+{
+	info->inf.fd = open(info->inf.path, O_RDONLY);
+	if (info->inf.fd < 0)
+		pp_errmsg(info, 1, "pipex: open(): infile");
+	info->ouf.fd = open(info->ouf.path, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (info->ouf.fd < 0)
+		pp_errmsg(info, 1, "pipex: open(): outfile");
+	if (pipe(fd) == -1)
+		pp_errmsg(info, 1, "pipex: pipe(): fd");
+}
+
+void
 	pp_pipex(t_info *info, char **env)
 {
 	int		status;
@@ -23,22 +36,11 @@ int
 	pid_t	child;
 	t_cmd	*ptr;
 
-	info->inf.fd = open(info->inf.path, O_RDONLY);
-	if (info->inf.fd < 0)
-		printf("Error, infile open\n");
-
-	info->ouf.fd = open(info->ouf.path, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (info->ouf.fd < 0)
-		printf("Error, outfile open\n");
-
-	if (pipe(fd) == -1)
-		printf("Error, pipe\n");
-
+	openfiles(info, fd);
 	ptr = info->tcmd;
 	child = fork();
-
 	if (child == -1)
-		printf("Error, fork\n");
+		pp_errmsg(info, 1, "pipex: fork(): 1st fork");
 
 	if (child == 0)	// child
 	{
@@ -47,7 +49,7 @@ int
 		close(fd[PIPE_READ]);
 		close(fd[PIPE_WRITE]);
 		execve(ptr->cmd, ptr->arg, env);
-		printf("Error cmd 1\n");
+		pp_errmsg(info, 1, "pipex: execve(): command 1");
 	}
 	else
 	{
@@ -58,10 +60,8 @@ int
 		close(fd[PIPE_WRITE]);
 		waitpid(child, &status, 0);
 		execve(ptr->cmd, ptr->arg, env);
-		printf("Error cmd 2\n");
+		pp_errmsg(info, 1, "pipex: execve(): command 2");
 	}
-
-	return (0);
 }
 /*parent
  * │
