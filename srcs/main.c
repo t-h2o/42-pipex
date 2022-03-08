@@ -6,7 +6,7 @@
 /*   By: tgrivel <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:24:45 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/08 13:16:54 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:39:43 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int
 {
 	t_info	info;
 
-	if (argc != 5)
+	if (argc < 5)
 		pp_errmsg(0, 1, "pipex: usage: bad number of arguments");
 	init_info(&info, argv, env);
 	pp_pipex(&info, env);

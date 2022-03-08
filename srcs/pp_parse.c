@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:29:39 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/08 14:02:55 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:56:41 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void
  *	put the info in tab**
  */
 
-static void
+static int
 	parse_cmd(t_info *info, char **argv)
 {
 	t_cmd	*ptr;
@@ -122,6 +122,7 @@ static void
 			break ;
 		i++;
 	}
+	return (i);
 }
 /*
  * *tcmd───►cmd
@@ -134,10 +135,12 @@ static void
 void
 	pp_parse(t_info *info, char **argv, char **env)
 {
+	int	i;
+
 	get_info(info, env, "PATH=");
+	i = parse_cmd(info, argv);
 	info->inf.path = pp_strcpy(argv[1], 0, pp_strlen(argv[1]));
-	info->ouf.path = pp_strcpy(argv[4], 0, pp_strlen(argv[4]));
-	parse_cmd(info, argv);
+	info->ouf.path = pp_strcpy(argv[i + 3], 0, pp_strlen(argv[4]));
 }
 /*		example of arguments:
  *
