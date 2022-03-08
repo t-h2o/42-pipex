@@ -6,7 +6,7 @@
 /*   By: tgrivel <tgrivel@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:29:39 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/08 13:05:44 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/08 13:18:04 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ static void
 	t_cmd	*ptr;
 	int		i;
 
+	info->tcmd = malloc(sizeof(t_cmd));
 	ptr = info->tcmd;
 	i = 0;
 	while (1)
@@ -121,6 +122,13 @@ static void
 		i++;
 	}
 }
+/*
+ * *tcmd───►cmd
+ *          arg
+ *          *next───►cmd
+ *                   arg
+ *                   *next───► 0
+ */
 
 void
 	pp_parse(t_info *info, char **argv, char **env)
