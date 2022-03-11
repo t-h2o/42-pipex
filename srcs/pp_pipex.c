@@ -6,7 +6,7 @@
 /*   By: tgrivel <tggrivel@student.42lausanne.ch>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 15:28:05 by tgrivel           #+#    #+#             */
-/*   Updated: 2022/03/08 17:08:35 by tgrivel          ###   ########.fr       */
+/*   Updated: 2022/03/11 11:36:31 by tgrivel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,38 +40,45 @@ static int
 	return (r);
 }
 
+static void
+	subprocess(t_info *info, t_cmd *cmd, char **env)
+{
+	pid_t	child;
+	int		fd[2];
+
+	if (pipe(fd) == -1)
+		pp_errmsg(info, 1, "pipex: Error: pipe");
+	child = fork();
+	if (child == -1)
+		pp_errmsg(info, 1, "pipex: Error: fork");
+	if (child == 0)
+	{
+		dup2(fd[PIPE_WRITE], STDOUT);
+		close(fd[PIPE_READ]);
+		close(fd[PIPE_WRITE]);
+		execve(cmd->cmd, cmd->arg, env);
+		pp_errmsg(info, 1, "pipex: Error: execve");
+	}
+	dup2(fd[PIPE_READ], STDIN);
+	close(fd[PIPE_READ]);
+	close(fd[PIPE_WRITE]);
+	waitpid(child, 0, 0);
+}
+
 void
 	pp_pipex(t_info *info, char **env)
 {
 	int		ncmd;
-	int		fd[2];
-	pid_t	child;
 	t_cmd	*ptr;
 
 	openfiles(info);
 	ptr = info->tcmd;
-	ncmd = numbercmd(ptr);
 	dup2(info->inf.fd, STDIN);
+	ncmd = numbercmd(ptr);
 	while (ncmd-- > 1)
 	{
-		if (pipe(fd) == -1)
-			pp_errmsg(info, 1, "pipex: Error: pipe");
-		child = fork();
-		if (child == -1)
-			pp_errmsg(info, 1, "pipex: Error: fork");
-		if (child == 0)
-		{
-			dup2(fd[PIPE_WRITE], STDOUT);
-			close(fd[PIPE_READ]);
-			close(fd[PIPE_WRITE]);
-			execve(ptr->cmd, ptr->arg, env);
-			pp_errmsg(info, 1, "pipex: Error: execve");
-		}
+		subprocess(info, ptr, env);
 		ptr = ptr->next;
-		dup2(fd[PIPE_READ], STDIN);
-		close(fd[PIPE_READ]);
-		close(fd[PIPE_WRITE]);
-		waitpid(child, 0, 0);
 	}
 	dup2(info->ouf.fd, STDOUT);
 	execve(ptr->cmd, ptr->arg, env);
