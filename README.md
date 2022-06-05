@@ -1,5 +1,7 @@
 # 42 pipex
 
+![schema](https://commons.wikimedia.org/wiki/File:Pipeline.svg#/media/File:Pipeline.svg)
+
 ## explain whats should do the program.
 
 Clic to see [explanation](./Assets/readme/explain.md)
