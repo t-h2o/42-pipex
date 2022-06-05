@@ -1,6 +1,6 @@
 # 42 pipex
 
-![schema](https://commons.wikimedia.org/wiki/File:Pipeline.svg#/media/File:Pipeline.svg)
+![schema](https://upload.wikimedia.org/wikipedia/commons/f/f6/Pipeline.svg)
 
 ## explain whats should do the program.
 
